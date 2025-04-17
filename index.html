@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestion des Clients</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="script.js"></script>
+  <style>
+    #authOverlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 23, 42, 0.9);
+      z-index: 50;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 min-h-screen flex flex-col">
+  <!-- Overlay Auth -->
+  <div id="authOverlay">
+    <div class="bg-white rounded-xl shadow-2xl p-8 w-80 flex flex-col gap-4">
+      <h2 class="text-xl font-semibold text-center text-indigo-600">Connexion requise</h2>
+      <form id="loginForm" class="flex flex-col gap-4">
+        <label class="flex flex-col gap-1">
+          <span>Nom d'utilisateur</span>
+          <input type="text" id="username" required class="border border-slate-300 rounded-lg p-2" />
+        </label>
+        <label class="flex flex-col gap-1">
+          <span>Mot de passe</span>
+          <input type="password" id="password" required class="border border-slate-300 rounded-lg p-2" />
+        </label>
+        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg">Se connecter</button>
+        <p id="loginError" class="text-rose-600 text-sm text-center hidden">Identifiants invalides, réessayez.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <header class="bg-indigo-600 text-white py-4 shadow-lg">
+    <h1 class="text-center text-3xl font-semibold">Gestion des Clients</h1>
+  </header>
+  <main class="flex-1 container mx-auto p-4">
+    <!-- Content will be displayed after authentication -->
+    <section id="appContent" class="hidden">
+      <!-- Form -->
+      <section class="col-span-1 bg-white rounded-2xl shadow-xl p-6 flex flex-col gap-4">
+        <h2 class="text-xl font-medium text-indigo-700">Ajouter un Client</h2>
+        <form id="customerForm" class="flex flex-col gap-4">
+          <label class="flex flex-col gap-1">
+            <span>Nom du Client</span>
+            <input id="name" required class="rounded-lg border border-slate-300 p-2" />
+          </label>
+          <label class="flex flex-col gap-1">
+            <span>Email</span>
+            <input type="email" id="email" required class="rounded-lg border border-slate-300 p-2" />
+          </label>
+          <label class="flex flex-col gap-1">
+            <span>Adresse</span>
+            <input id="address" class="rounded-lg border border-slate-300 p-2" />
+          </label>
+          <label class="flex flex-col gap-1">
+            <span>Numéro de Téléphone</span>
+            <input type="tel" id="phone" class="rounded-lg border border-slate-300 p-2" />
+          </label>
+          <label class="flex flex-col gap-1">
+            <span>Date de Début</span>
+            <input type="date" id="startDate" required class="rounded-lg border border-slate-300 p-2" />
+          </label>
+          <label class="flex flex-col gap-1">
+            <span>Date de Fin</span>
+            <input type="date" id="endDate" required class="rounded-lg border border-slate-300 p-2" />
+          </label>
+          <button class="self-start bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl">Ajouter</button>
+        </form>
+      </section>
+
+      <!-- Table -->
+      <section class="col-span-1 lg:col-span-2 bg-white rounded-2xl shadow-xl p-6 flex flex-col gap-4 overflow-x-auto">
+        <h2 class="text-xl font-medium text-indigo-700">Clients Enregistrés</h2>
+        <table class="min-w-full divide-y divide-slate-200" id="customersTable">
+          <thead class="bg-slate-50 text-slate-600 select-none">
+            <tr>
+              <th class="px-4 py-2 text-left text-sm font-semibold">Nom</th>
+              <th class="px-4 py-2 text-left text-sm font-semibold">Email</th>
+              <th class="px-4 py-2 text-left text-sm font-semibold">Téléphone</th>
+              <th class="px-4 py-2 text-left text-sm font-semibold">Adresse</th>
+              <th class="px-4 py-2 text-left text-sm font-semibold">Début</th>
+              <th class="px-4 py-2 text-left text-sm font-semibold">Fin</th>
+              <th class="px-4 py-2 text-left text-sm font-semibold">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="customersBody" class="divide-y divide-slate-100"></tbody>
+        </table>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
